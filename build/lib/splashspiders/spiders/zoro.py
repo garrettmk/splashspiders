@@ -35,7 +35,7 @@ class ZoroSpider(Spider):
 
         # Extract product page links
         for rel_link in response.css('ul.product-info h5.part-title a::attr(href)').extract():
-            requests.append(self.make_splash_request(response.urljoin(rel_link), self.parse_product))
+            requests.append(Request(url=response.urljoin(rel_link), callback=self.parse_product))
 
         if not requests:
             self.logger.debug('No product links found on %s' % response.url)
