@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from base64 import b64encode
+from time import sleep
 
 from scrapy import Request
 from scrapy.spiders import Spider
@@ -27,11 +28,25 @@ class ZoroSpider(Spider):
         return self.make_splash_request(url, self.parse_category)
 
     def make_splash_request(self, url, callback):
-        return SplashRequest(url=url, callback=callback, endpoint='render.html', args={'wait': 5},
-                             splash_headers={'Authorization': 'Basic %s' % self.encoded_splash_key.decode()})
+        request = SplashRequest(url=url, callback=callback, endpoint='render.html', args={'wait': 5, 'images': False},
+                                splash_headers={'Authorization': 'Basic %s' % self.encoded_splash_key.decode()})
+        request.meta['tries'] = 1
+        return request
 
     def parse_category(self, response):
         requests = []
+
+        # Retry the request if it didn't work
+        tries = response.request.meta['tries']
+        if response.status != 200 and tries < 3:
+            self.logger.error('Request for %s failed (status code %s), retrying...' % (response.url, response.status))
+
+            req = self.make_splash_request(url=response.url, callback=self.parse_category)
+            req.dont_filter = True
+            req.meta['tries'] = tries + 1
+
+            sleep(30)
+            return req
 
         # Extract product page links
         for rel_link in response.css('ul.product-info h5.part-title a::attr(href)').extract():
