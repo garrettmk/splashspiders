@@ -70,6 +70,7 @@ DOWNLOADER_MIDDLEWARES = {
 }
 
 SPLASH_URL = 'https://lojqz6s0-splash.scrapinghub.com'
+RETRY_TIMES = 3
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
