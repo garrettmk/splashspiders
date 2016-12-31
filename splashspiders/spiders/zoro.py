@@ -27,7 +27,31 @@ class ZoroSpider(Spider):
     encoded_splash_key = b64encode(b'9a124befc1bb4a85b8bfb41b278a3889:')
 
                   # Safety & Security
-    start_urls = ['https://www.zoro.com/gloves-eyewear-ear-protection-masks-clothing/c/13/']
+    start_urls = [
+        #'https://www.zoro.com/gloves-eyewear-ear-protection-masks-clothing/c/13/',
+        'https://www.zoro.com/pens-pencils-markers/c/9995/',
+        'https://www.zoro.com/food-drinks/c/9986/',
+        'https://www.zoro.com/flooring-molding/c/9985/',
+        'https://www.zoro.com/shipping-labels/c/7353/',
+        'https://www.zoro.com/wrap-film/c/5610/',
+
+        #'https://www.zoro.com/office-furniture/c/9075/',
+        'https://www.zoro.com/search?q=&categoryl2=Office+Furniture&categoryl3=Furniture+Accessories+&categoryl1=Office+Supplies%2C+Furniture+%26+Breakroom+Supplies',
+        'https://www.zoro.com/search?q=&categoryl2=Office+Furniture&categoryl3=Furniture+Repair&categoryl1=Office+Supplies%2C+Furniture+%26+Breakroom+Supplies',
+        'https://www.zoro.com/search?q=&categoryl2=Office+Furniture&categoryl3=Clocks&categoryl1=Office+Supplies%2C+Furniture+%26+Breakroom+Supplies',
+        'https://www.zoro.com/search?q=&categoryl2=Office+Furniture&categoryl3=Monitor+Mounts+%26+Stands&categoryl1=Office+Supplies%2C+Furniture+%26+Breakroom+Supplies',
+        'https://www.zoro.com/search?q=&categoryl2=Office+Furniture&categoryl3=Arm%2C+Back%2C+and+Foot+Rests&categoryl1=Office+Supplies%2C+Furniture+%26+Breakroom+Supplies',
+        'https://www.zoro.com/search?q=&categoryl2=Office+Furniture&categoryl3=Cabinet+Accessories+&categoryl1=Office+Supplies%2C+Furniture+%26+Breakroom+Supplies',
+        'https://www.zoro.com/search?q=&categoryl2=Office+Furniture&categoryl3=Bumpers&categoryl1=Office+Supplies%2C+Furniture+%26+Breakroom+Supplies',
+
+        'https://www.zoro.com/protective-packaging/c/5571/',
+        'https://www.zoro.com/bags/c/9950/',
+        'https://www.zoro.com/writing-boards/c/9996/',
+        'https://www.zoro.com/filing-organizing/c/9984/',
+        'https://www.zoro.com/breakroom-supplies/c/4485/',
+        'https://www.zoro.com/food-preparation/c/9987/',
+
+    ]
 
     extract_sub_categories = LinkExtractor(allow=r'&categoryl\d=', restrict_css='#category-display')
     extract_products = LinkExtractor(allow=r'/i/')
